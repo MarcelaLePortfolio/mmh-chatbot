@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';  // Correct import for route params
 
 export default function ChatPage() {
   const { id } = useParams();  // Get chat ID from URL params
-  const [chatData, setChatData] = useState<any>(null);  // Specify the type as 'any' for chatData
+  const [chatData, setChatData] = useState(null);
 
   useEffect(() => {
     // Fetch chat data based on the ID from params
