@@ -1,19 +1,11 @@
-import './globals.css';
-import { Metadata } from 'next';
+// app/layout.tsx
 
-export const metadata: Metadata = {
-  title: 'Marketing Mother’s Helper',
-  description: 'AI-powered support with retro-modern flair.',
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }
