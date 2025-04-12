@@ -1,23 +1,13 @@
-import { authMiddleware } from "@auth/core/next/middleware";
+import { withAuth } from "next-auth/middleware";
 
-export default authMiddleware({
+export default withAuth({
   pages: {
     signIn: "/login",
   },
   callbacks: {
-    authorized({ auth, request }) {
-      const isLoggedIn = !!auth?.user;
-      const pathname = request.nextUrl.pathname;
-
-      const isPublic = ["/login", "/register"].some((path) =>
-        pathname.startsWith(path)
-      );
-
-      if (isLoggedIn && isPublic) {
-        return Response.redirect(new URL("/", request.nextUrl));
-      }
-
-      return isPublic || isLoggedIn;
+    authorized({ token }) {
+      const pathname = new URL(token?.sub ?? "", "http://localhost").pathname;
+      return !!token || ["/login", "/register"].some((path) => pathname.startsWith(path));
     },
   },
 });
