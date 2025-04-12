@@ -1,6 +1,6 @@
-import type { NextAuthConfig } from 'next-auth';
+import type { NextAuthOptions } from 'next-auth';
 
-export const authConfig = {
+export const authConfig: NextAuthOptions = {
   pages: {
     signIn: '/login',
     newUser: '/',
@@ -21,12 +21,12 @@ export const authConfig = {
       }
 
       if (isOnRegister || isOnLogin) {
-        return true; // Always allow access to register and login pages
+        return true;
       }
 
       if (isOnChat) {
         if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
+        return false;
       }
 
       if (isLoggedIn) {
@@ -36,4 +36,4 @@ export const authConfig = {
       return true;
     },
   },
-} satisfies NextAuthConfig;
+};
